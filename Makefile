@@ -1,18 +1,13 @@
-ifdef SIMULATOR
-TARGET := simulator:clang:latest:11.0
-else
-TARGET := iphone:clang:latest:11.0
-endif
-INSTALL_TARGET_PROCESSES = SpringBoard
-
-BUNDLE_NAME = CCNoiseControlProvider
-CCNoiseControlProvider_BUNDLE_EXTENSION = bundle
-CCNoiseControlProvider_FILES = CCNoiseControl.m CCNoiseControlProvider.m CCNoiseControlNormal.m
-CCNoiseControlProvider_CFLAGS = -fobjc-arc
-CCNoiseControlProvider_PRIVATE_FRAMEWORKS = ControlCenterUIKit
-CCNoiseControlProvider_INSTALL_PATH = /Library/ControlCenter/CCSupport_Providers
-
-ADDITIONAL_CFLAGS += -Wno-error=unused-variable -Wno-error=unused-function
+TARGET = iphone:16.5:14.0
 
 include $(THEOS)/makefiles/common.mk
+
+BUNDLE_NAME = CCNoiseControlProvider
+
+$(BUNDLE_NAME)_BUNDLE_EXTENSION = bundle
+$(BUNDLE_NAME)_FILES = $(wildcard *.m)
+$(BUNDLE_NAME)_CFLAGS = -fobjc-arc
+$(BUNDLE_NAME)_PRIVATE_FRAMEWORKS = ControlCenterUIKit
+$(BUNDLE_NAME)_INSTALL_PATH = /Library/ControlCenter/Bundles
+
 include $(THEOS_MAKE_PATH)/bundle.mk
